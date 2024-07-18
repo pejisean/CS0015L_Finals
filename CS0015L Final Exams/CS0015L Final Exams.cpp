@@ -195,11 +195,9 @@ void Bike::checkBikeAvailability(Bikestore& store, int bikeID) {
             cout << "Number of Bikes available: " << it->quantity << endl;
             if (it->quantity > 0) {
                 cout << "Status: Available" << endl;
-                it->rentStatus = true;
             }
             else {
                 cout << "Status: Unavailable" << endl;
-                it->rentStatus = false;
             }
             return;
         }
@@ -377,7 +375,7 @@ void Bikestore::menu() {
     while (choice != 8) {
         repeat('=', 20);
         cout << endl;
-        cout << '\t' << "MENU" << endl;
+        cout << "Bike Rental Menu" << endl;
         repeat('=', 20);
         cout << endl;
 
@@ -512,6 +510,11 @@ void Bikestore::menu() {
                     Customer::listBikesRentedByCustomer(*this, CustomerID);
                     break;
                 }
+                default:
+
+                    cout << "Please input a number from 1-3...";
+                    break;
+                }
             break;
             case 8:
                 //Exit
@@ -521,11 +524,11 @@ void Bikestore::menu() {
                
                 cout << "Please input a number from 1-8...";
                 break;
-            }
-            cout << "\nPress any key to continue...\n";
-            _getch();
-            system("CLS");
+            
         }
+        cout << "\nPress any key to continue...\n";
+        _getch();
+        system("CLS");
     }
 }
 
