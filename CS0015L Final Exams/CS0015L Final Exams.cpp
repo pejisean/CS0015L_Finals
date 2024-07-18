@@ -131,7 +131,7 @@ void Bike::rentBike(Bikestore& store, int customerID, int bikeID) {
                     if (cit->Customer_ID == customerID) {
                         cit->rentBike(bikeID);
                         store.saveBikes();
-                        store.saveCustomers();
+                        store.saveCustomerRents();
                         cout << "Bike rented successfully." << endl;
                         return;
 
@@ -219,6 +219,7 @@ void Customer::showDetails() {
 // Function to add a customer to the queue
 void Customer::addCustomer(Bikestore& store, int id, string name, string address) {
     store.customers.push_back(CustomerRent(id, name, address));
+    store.saveCustomers();
     cout << "Customer added successfully";
 }
 
@@ -459,69 +460,71 @@ void Bikestore::menu() {
             break;
         }
         case 7:
-            //Customer Maintenance
-            system("CLS");
+                //Customer Maintenance
+                system("CLS");
 
-            repeat('=', 20);
-            cout << endl;
-            cout << '\t' << "MENU" << endl;
-            repeat('=', 20);
-            cout << endl;
+                repeat('=', 20);
+                cout << endl;
+                cout << '\t' << "Bike Rental Menu" << endl;
+                repeat('=', 20);
+                cout << endl;
 
-            cout << "1. Add New Customer" << endl;
-            cout << "2. Show Customer Details" << endl;
-            cout << "3. List of Bikes rented by Customer" << endl;
+                cout << "1. Add New Customer" << endl;
+                cout << "2. Show Customer Details" << endl;
+                cout << "3. List of Bikes rented by Customer" << endl;
 
-            cin >> num;
+                cin >> num;
 
-            switch (num) {
+                switch (num) {
 
-            case 1:
-            {
-                //Add new Customer
-                int CustomerID;
-                string name, address;
-                cout << "Enter the ID you want to identify the customer with: ";
-                cin >> CustomerID;
-                cout << "Enter Customer's name: ";
-                cin.ignore();
-                getline(cin, name);
-                cout << "Enter Customer's Address: ";
-                getline(cin, address);
-                Customer::addCustomer(*this, CustomerID, name, address);
-                break;
-            }
-            case 2:
+                case 1:
+                {
+                    //Add new Customer
+                    int CustomerID;
+                    string name, address;
+                    cout << "Enter the ID you want to identify the customer with: ";
+                    cin >> CustomerID;
+                    cout << "Enter Customer's name: ";
+                    cin.ignore();
+                    getline(cin, name);
+                    cout << "Enter Customer's Address: ";
+                    getline(cin, address);
+                    Customer::addCustomer(*this, CustomerID, name, address);
+                    break;
+                }
+                case 2:
 
-            {
-                //Show Customer Details
-                int CustomerID;
-                cout << "Enter the ID of the Customer you want to view: ";
-                cin >> CustomerID;
-                Customer::showCustomerDetails(*this, CustomerID);
+                {
+                    //Show Customer Details
+                    int CustomerID;
+                    cout << "Enter the ID of the Customer you want to view: ";
+                    cin >> CustomerID;
+                    Customer::showCustomerDetails(*this, CustomerID);
 
-                break;
-            }
-            case 3:
-            {
-                //List of Bikes Rented by Customer
-                int CustomerID;
-                cout << "Enter the ID of the Customer you want to view the rental history of: ";
-                cin >> CustomerID;
-                Customer::listBikesRentedByCustomer(*this, CustomerID);
-                break;
-            }
+                    break;
+                }
+                case 3:
+                {
+                    //List of Bikes Rented by Customer
+                    int CustomerID;
+                    cout << "Enter the ID of the Customer you want to view the rental history of: ";
+                    cin >> CustomerID;
+                    Customer::listBikesRentedByCustomer(*this, CustomerID);
+                    break;
+                }
             break;
             case 8:
                 //Exit
                 cout << "Exiting program...\n";
                 break;
             default:
+               
+                cout << "Please input a number from 1-8...";
                 break;
-                cout << "\nPress any key to continue...\n";
-                _getch();
-                system("CLS");
             }
+            cout << "\nPress any key to continue...\n";
+            _getch();
+            system("CLS");
         }
     }
 }
