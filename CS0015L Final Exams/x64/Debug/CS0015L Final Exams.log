@@ -1,2 +1,6 @@
 ﻿  CS0015L Final Exams.cpp
+C:\Users\Sean\source\repos\CS0015L Final Exams\CS0015L Final Exams\CS0015L Final Exams.cpp(105,23): warning C4099: 'Bike': type name first seen using 'class' now seen using 'struct'
+C:\Users\Sean\source\repos\CS0015L Final Exams\CS0015L Final Exams\CS0015L Final Exams.cpp(17,7): message : see declaration of 'Bike'
+C:\Users\Sean\source\repos\CS0015L Final Exams\CS0015L Final Exams\CS0015L Final Exams.cpp(106,27): warning C4099: 'Customer': type name first seen using 'class' now seen using 'struct'
+C:\Users\Sean\source\repos\CS0015L Final Exams\CS0015L Final Exams\CS0015L Final Exams.cpp(49,7): message : see declaration of 'Customer'
   CS0015L Final Exams.vcxproj -> C:\Users\Sean\source\repos\CS0015L Final Exams\x64\Debug\CS0015L Final Exams.exe

@@ -1,39 +1,50 @@
 #include "customer.h"
 
+// Constructor to initialize Customer
+Customer::Customer(int id = 0, const string& name = "", const string& address = "") {
+    Customer_ID = id;
+    Name = name;
+    Address = address;
+};
+
+//Customer ADT Functions
+
+//Function to show Customer details
+void Customer::showDetails() {
+    cout << "Customer ID: " << Customer_ID << "\nCustomer Name: " << Name
+        << "\nAddress: " << Address << endl;
+}
+
 // Function to add a customer to the queue
-void addCustomer(queue<Customer>& customerQueue, int& nextID) {
-    string name, address;
-    cout << "Enter the name of the customer: ";
-    getline(cin, name);
-    cout << "Enter the address of the customer: ";
-    getline(cin, address);
-    Customer newCustomer(nextID++, name, address);
-    customerQueue.push(newCustomer);
-    cout << "Customer added: ID=" << newCustomer.Customer_ID << ", Name=" << newCustomer.Name << ", Address=" << newCustomer.Address << endl;
+void Customer::addCustomer(Bikestore &store, int id, string name, string address) {
+    store.customers.push_back(CustomerRent(id, name, address));
+    cout << "Customer added successfully";
 }
 
 // Function to show customer details by ID
-void showCustomerDetails(const queue<Customer>& customerQueue, int id) {
-    queue<Customer> tempQueue = customerQueue;
-    while (!tempQueue.empty()) {
-        Customer customer = tempQueue.front();
-        if (customer.Customer_ID == id) {
-            cout << "Customer ID: " << customer.Customer_ID << endl;
-            cout << "Name: " << customer.Name << endl;
-            cout << "Address: " << customer.Address << endl;
+void Customer::showCustomerDetails(Bikestore &store, int CustomerID) {
+    for (deque<CustomerRent>::iterator it = store.customers.begin(); it != store.customers.end(); ++it) {
+        if (it->Customer_ID == CustomerID) {
+            it->showDetails();
             return;
         }
-        tempQueue.pop();
     }
-    cout << "Customer not found!" << endl;
+    cout << "Customer not found";
 }
 
 // Function to print the list of all customers
-void printAllCustomers(const queue<Customer>& customerQueue) {
-    queue<Customer> tempQueue = customerQueue;
-    while (!tempQueue.empty()) {
-        Customer customer = tempQueue.front();
-        cout << "Customer ID: " << customer.Customer_ID << ", Name: " << customer.Name << ", Address: " << customer.Address << endl;
-        tempQueue.pop();
+void Customer::printAllCustomers(Bikestore& store) {
+    for (deque<CustomerRent>::iterator it = store.customers.begin(); it != store.customers.end(); ++it) {     
+        it->showDetails();
+        return;
+    }
+}
+
+void Customer::listBikesRentedByCustomer(Bikestore& store, int CustomerID) {
+    for (deque<CustomerRent>::iterator it = store.customers.begin(); it != store.customers.end(); ++it) {
+        if (it->Customer_ID == CustomerID) {
+            it->displayRentedBikes();
+            return;
+        }
     }
 }
